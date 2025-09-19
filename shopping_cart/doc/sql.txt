@@ -59,17 +59,43 @@ WHERE c.user_id = 1;
 
 
 
+
 shopping_cart/
 ├── app/
-│   ├── __init__.py
-│   ├── extensions.py
-│   ├── models/
-│   │   ├── user.py
-│   │   ├── product.py
-│   │   └── cart_item.py
-│   ├── routes/
-│   │   └── cart.py
-│   └── templates/
-│       └── view_cart.html
-├── config.py
-├── run.py
+│   ├── __init__.py              ← 建立 Flask app 並註冊 Blueprint
+│   ├── extensions.py            ← 放 SQLAlchemy、LoginManager 等擴充套件
+│
+│   ├── models/                  ← 資料庫模型（Model）
+│   │   ├── product_model.py     ← 商品資料表 Product
+│   │   ├── cart_item_model.py   ← 購物車項目 CartItem
+│   │   └── user_model.py        ← 使用者 User（如果有登入功能）
+│
+│   ├── routes/                  ← 路由控制器（View / Controller）
+│   │   ├── product_routes.py    ← 商品瀏覽與加入購物車
+│   │   ├── cart_routes.py       ← 顯示購物車、刪除項目
+│   │   └── init_routes.py       ← 初始化資料表與測試資料
+│
+│   ├── templates/               ← HTML 模板
+│   │   ├── products.html        ← 商品列表頁
+│   │   └── view_cart.html       ← 購物車頁面
+│
+│   └── static/                  ← CSS、圖片、JS 等靜態資源
+│       └── style.css
+│
+├── config.py                    ← 資料庫連線與設定
+└── run.py                       ← 啟動 Flask 專案
+1. 商品瀏覽頁面 
+‧ 	顯示所有商品（名稱、價格、庫存、圖片）
+‧ 	每個商品附加「加入購物車」按鈕
+‧ 	可選擇數量後送出表單
+2. 結帳流程 
+‧ 	顯示購物車總金額
+‧ 	模擬結帳按鈕（未來可串接付款 API）
+‧ 	清空購物車或建立訂單記錄
+3. 使用者登入系統
+‧ 	建立  表的登入/註冊功能
+‧ 	讓購物車與使用者帳號綁定
+‧ 	使用 Flask-Login 管理 session
+4. 商品管理後台（CRUD）
+‧ 	管理者可以新增、修改、刪除商品
+‧ 	可設定庫存、價格、圖片等欄位

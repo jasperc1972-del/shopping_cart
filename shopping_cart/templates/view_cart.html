@@ -15,12 +15,7 @@
             <tr>
                 <td>{{ item.name }}</td>
                 <td>{{ item.price }}</td>
-                <td>
-                    <form method="POST" action="{{ url_for('cart_bp.update_cart', item_id=item.id) }}">
-                        <input type="number" name="quantity" value="{{ item.quantity }}" min="1">
-                        <button type="submit" class="btn btn-sm btn-primary">更新</button>
-                    </form>
-                </td>
+                <td>{{ item.quantity }}</td>
                 <td>{{ item.subtotal }}</td>
                 <td>
                     <form method="POST" action="{{ url_for('cart_bp.remove_item', item_id=item.id) }}">
